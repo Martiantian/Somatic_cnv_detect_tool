@@ -1,6 +1,6 @@
 #!/bin/perl -w
-#Author: ***
-#Email:***@genomics.org.cn
+#Author: wangxiaofeng
+#Email: wangxiaofeng@genomics.cn
 #File Name:
 #Description:
 # this program after extractInfo.pl chrno start length

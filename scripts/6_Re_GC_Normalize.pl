@@ -1,11 +1,13 @@
 #! /bin/perl  -w 
-#Author: ***
-#Email:***@genomics.org.cn
+#Author: qianzhaoyang 
+#        shichang
+#Email: qianzhaoyang@genomics.cn
+#       shichang@genomics.cn
 #File Name:
 #Description:
 #  
 #Edit History:
-#2016-01-30 17:00:03  File created.
+#2017-12-10 14:20:03  File created.
 use strict;
 die "perl $0 [input GCref file][input Filelist] [input lm-2.R] [input Rscript__path] [input outdir]"if @ARGV<5;
 my $ref=shift;

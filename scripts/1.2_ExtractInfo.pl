@@ -1,6 +1,8 @@
 #!/usr/bin/perl -w
-#Author: ***
-#Email:***@genomics.cn
+#Author: wangxiaofeng
+#        shichang
+#Email: wangxiaofeng@genomics.cn
+#       shichang@genomics.cn
 #File Name:
 #Description:
 #  

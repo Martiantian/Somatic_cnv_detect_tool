@@ -22,7 +22,7 @@ use Getopt::Long;
 	somatic_cnv_detect_tool.pl   [options]
 
 	Options:
-		-i|--input         <STR>    (required)absolute path for sample file list(sort.markdup.bam),col[0]=name col[1]=absolute path  
+		-i|--input         <STR>    (required)absolute path for sample file list(sort.markdup.bam),col[0]=name col[1]=absolute path sep=\t 
 		-o|--out           <STR>    (required)output directory 
 		-a|--alpha         <FLOAT>  (required)alpha_confidence_level 
 		-d|--debin         <INT>    (required) debin length for first GC normalization(bp) 

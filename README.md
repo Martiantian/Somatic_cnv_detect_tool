@@ -26,7 +26,7 @@ Run SCDT
 To start SCDT, you can run 'perl somatic_cnv_detect_tool_180326.pl' to see usage and options.
 $perl somatic_cnv_detect_tool_180326.pl [options]
 Options:
-	-i|--input         <STR>    (required)absolute path for sample file list(sort.markdup.bam),col[0]=name col[1]=absolute path 
+	-i|--input         <STR>    (required)absolute path for sample file list(sort.markdup.bam),col[0]=name col[1]=absolute path sep=\t
 	-o|--out           <STR>    (required)output directory 
 	-a|--alpha         <FLOAT>  (required)alpha_confidence_level 
 	-d|--debin         <INT>    (required) debin length for first GC normalization(bp) 

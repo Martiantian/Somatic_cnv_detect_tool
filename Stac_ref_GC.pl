@@ -45,7 +45,7 @@ if ($type==1){
 		}
 	close OUT;
 	close OUT2;
-	`gzip $path/data/hg19.$len.1.gc`;
+	`gzip $path/data/hg19.$len.1st.gc`;
 }elsif($type==2){
 	$len=1000000 unless(defined($len));
 	my %hash=%{&getSeq($ref)};

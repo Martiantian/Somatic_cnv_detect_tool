@@ -24,11 +24,8 @@ unshift(@TG,[(1,0,0)]);
 
 my $tmps;
 my $i=1;
-if($bam=~/bam/){
 	open IN,"samtools view $bam |"or die $!;
-}elsif($bam=~/sam/){
-	open IN,"$bam"or die $!;
-}
+
 while (my $LINE=<IN>){
 	chomp($LINE);
 	next if $LINE=~/^\s*$/;

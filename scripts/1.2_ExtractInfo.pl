@@ -12,11 +12,7 @@ use strict;
 die "perl $0 [input bamFile][input maximum_quality] [input PE TorF]" if(@ARGV<2);
 my ($bamFile,$maxq,$PE)=@ARGV;
 $maxq=60 unless defined($maxq);
-if($bamFile=~/.bam/){
-	open IN,"samtools view $bamFile |"or die $!;
-}else{
-	open IN,"$bamFile"or die $!;
-}
+open IN,"samtools view $bamFile |"or die $!;
 while(my $LINE=<IN>){
 	chomp($LINE);
 	next if $LINE=~/^\s*$/;

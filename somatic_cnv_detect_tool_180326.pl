@@ -22,11 +22,11 @@ use Getopt::Long;
 	somatic_cnv_detect_tool.pl   [options]
 
 	Options:
-		-i|--input         <STR>    (required)absolute path for sample file list containing sam.list or bam.list,col[0]=name col[1]=absolute path  
+		-i|--input         <STR>    (required)absolute path for sample file list(sort.markdup.bam),col[0]=name col[1]=absolute path  
 		-o|--out           <STR>    (required)output directory 
 		-a|--alpha         <FLOAT>  (required)alpha_confidence_level 
 		-d|--debin         <INT>    (required) debin length for first GC normalization(bp) 
-		-c|--control       <STR>    absolute path for control list containing sam.list or bam.list,col[0]=control col[1]=absolute path, default F
+		-c|--control       <STR>    absolute path for control list(sort.markdup.bam),col[0]=control col[1]=absolute path, default F
 		-b|--bin           <INT>    bin length(bp),default 1000000
 		-p|--pair          <STR>    pair end sequencing: T or F,default F 
 		-m|--maxq          <INT>    filter_bam_maxq,default 60
@@ -42,7 +42,7 @@ use Getopt::Long;
 
 =head1 Example:
 
-    somatic_cnv_detect_tool.pl -i ~/a/b/c/sam.list -a 0.01 -d 100000 -o result 
+    somatic_cnv_detect_tool.pl -i ~/a/b/c/bam.list -a 0.01 -d 100000 -o result 
 
 =cut
 
@@ -172,19 +172,12 @@ while(my $bamfile=<IN>){
 	print OUT "#!/bin/sh\n";
 
 #### bwa mem and get info ####
-	my ($sam,$sortbam);
-	$sam=$file;
+	my $sortbam=$file;
 
 	if($off_target eq "T"){ 
-		if(!$sam=~m/.*bam/){
-			print OUT $config{"samtools"}," view -S -b -q 1 $sam | ",$config{"samtools"}," sort -m 5000000000 - $datadir/$outname.sort\n";
-			$sortbam="$datadir/$outname.sort";
-		}else{
-			$sortbam=$sam;
-		}
 		print OUT $config{"perl"}," $TargetOff $sortbam $bed $maxq $PE >$datadir/$outname.no_bed.info\n";
 	}else{
-		print OUT $config{"perl"}," $ExtractInfo $sam $maxq $PE >$datadir/$outname.info\n";
+		print OUT $config{"perl"}," $ExtractInfo $sortbam $maxq $PE >$datadir/$outname.info\n";
 	}
 
 	print OUT "sort -n -k 1.4 -k 2 $datadir/$outname.*info >$datadir/$outname.sort.info\n";
@@ -237,27 +230,17 @@ if ($confilelist ne "F"){
 		print OUT "#!/bin/sh\n";
 
 	#### bwa mem and get info ####
-		my ($sam,$sortbam);
-		$sam=$file;
-
+		my $sortbam=$file;
 
 		if($off_target eq "T"){ 
-			if(!$sam=~m/.*bam/){
-				print OUT $config{"samtools"}," view -S -b -q 1 $sam | ",$config{"samtools"}," sort -m 5000000000 - $condir/$outname.sort\n";
-				$sortbam="$condir/$outname.sort";
-			}else{
-				$sortbam=$sam;
-			}
 			print OUT $config{"perl"}," $TargetOff $sortbam $bed $maxq $PE >$condir/$outname.no_bed.info\n";
 		}else{
-			print OUT $config{"perl"}," $ExtractInfo $sam $maxq $PE >$condir/$outname.info\n";
+			print OUT $config{"perl"}," $ExtractInfo $sortbam $maxq $PE >$condir/$outname.info\n";
 		}
 
 		print OUT "sort -n -k 1.4 -k 2 $condir/$outname.*info >$condir/$outname.sort.info\n";
 
-		if($file=~/fg.gz/){
-			print OUT "rm -rf $condir/$outname.sam\n";
-		}
+
 		if($off_target eq "T"){
 			print OUT "rm -rf $condir/$outname.no_bed.info\n";
 		}else{

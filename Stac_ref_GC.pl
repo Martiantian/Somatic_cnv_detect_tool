@@ -18,7 +18,7 @@ if ($type==1){
 	$len=170 unless(defined($len));
 	my %hash=%{&getSeq($ref)};
 	my %stat;
-	open OUT,">>$path/data/hg19.$len.1.gc"or die $!;
+	open OUT,">>$path/data/hg19.$len.1st.gc"or die $!;
 	foreach my $k(@chr){
 		$k=~s/23/X/;
 		$k=~s/24/Y/;
@@ -49,7 +49,7 @@ if ($type==1){
 }elsif($type==2){
 	$len=1000000 unless(defined($len));
 	my %hash=%{&getSeq($ref)};
-	open OUT,">$path/data/hg19.$len.2.gc"or die $!;
+	open OUT,">$path/data/hg19.$len.2nd.gc"or die $!;
 	foreach my $k(@chr){
 		$k=~s/23/X/;
 		$k=~s/24/Y/;

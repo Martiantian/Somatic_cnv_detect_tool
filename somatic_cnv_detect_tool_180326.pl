@@ -94,8 +94,8 @@ die ".bed file for off_target data must be specified or does not exist! $0" if (
 my $chr_length="$path/data/Chr_Length.txt";
 my $info_chrY_male="$path/data/chrY_interval_unique_q30_100kmer_1kb_1M_nofemale.info ";
 my $gc_stac_ref="$path/data/hg19.$gc_length.no_sex.gc.stac";
-my $gc_ref_1="$path/data/hg19.$gc_length.1.gc.gz";
-my $gc_ref_2="$path/data/hg19.$bin_length.2.gc";
+my $gc_ref_1="$path/data/hg19.$gc_length.1st.gc.gz";
+my $gc_ref_2="$path/data/hg19.$bin_length.2nd.gc";
 
 if ($gc_length !=170 && ! -s ($gc_ref_1 || $gc_stac_ref)){
 		die "ref gc file for -l $gc_length must be specified or does not exist! $0";

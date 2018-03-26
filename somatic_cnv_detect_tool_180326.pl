@@ -6,15 +6,15 @@ use Getopt::Long;
 
 =head1 NAME:
 
-	Program:	somatic_cnv_detect_tool.pl
-	Version:	0.1
-	Author:		qianzhaoyang(qianzhaoyang@genomics.cn)
-				wangxiaofeng(wangxiaofeng@genomics.cn)
-				shichang(shichang@genomics.cn)
-	Modified Date:	2014-05-19
-					2017-11-10
-					2018-01-10
-	Description:	cfDNA sequencing cnv analyze pipeline
+    Program:    Somatic_cnv_detect_tool.pl
+    Version:    0.1
+    Author:   qianzhaoyang(qianzhaoyang@genomics.cn)
+              wangxiaofeng(wangxiaofeng@genomics.cn)
+              shichang(shichang@genomics.cn)
+    Modified Date:  2014-05-19
+                    2017-11-10
+                    2018-01-10
+    Description:    cfDNA sequencing cnv analyze pipeline
 
 
 =head1 Usage:

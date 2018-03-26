@@ -8,12 +8,12 @@ use Getopt::Long;
 
 	Program:	somatic_cnv_detect_tool.pl
 	Version:	0.1
-	Author:		(@genomics.cn)
-				(@genomics.cn)
-				(@genomics.cn)
-	Modified Date:     2014-05-19
-	                   2017-11-10
-					   2018-01-10
+	Author:		qianzhaoyang(qianzhaoyang@genomics.cn)
+				wangxiaofeng(wangxiaofeng@genomics.cn)
+				shichang(shichang@genomics.cn)
+	Modified Date:	2014-05-19
+					2017-11-10
+					2018-01-10
 	Description:	cfDNA sequencing cnv analyze pipeline
 
 
@@ -22,11 +22,11 @@ use Getopt::Long;
 	somatic_cnv_detect_tool.pl   [options]
 
 	Options:
-		-i|--input         <STR>    absolute path for sample file list containing fq.gz.list or sam.list or bam.list,col[0]=name col[1]=absolute path (necessary)
-		-c|--control       <STR>    absolute path for control list containing fq.gz.list or sam.list or bam.list,col[0]=control col[1]=absolute path, default F
-		-o|--out           <STR>    output directory (necessary)
-		-a|--alpha         <FLOAT>  alpha_confidence_level (necessary)
-		-d|--debin         <INT>    debin length for first GC normalization(bp) (necessary)
+		-i|--input         <STR>    (required)absolute path for sample file list containing sam.list or bam.list,col[0]=name col[1]=absolute path  
+		-o|--out           <STR>    (required)output directory 
+		-a|--alpha         <FLOAT>  (required)alpha_confidence_level 
+		-d|--debin         <INT>    (required) debin length for first GC normalization(bp) 
+		-c|--control       <STR>    absolute path for control list containing sam.list or bam.list,col[0]=control col[1]=absolute path, default F
 		-b|--bin           <INT>    bin length(bp),default 1000000
 		-p|--pair          <STR>    pair end sequencing: T or F,default F 
 		-m|--maxq          <INT>    filter_bam_maxq,default 60
@@ -127,7 +127,7 @@ my $Rplotr="$path/scripts/9_Rplot2.R";
 our %config;
 my $config = "$path/scdt_cfg.pl";
 require $config;
-my $ref=$config{"ref"};
+
 
 `mkdir $outdir`;
 chdir ("$outdir");
@@ -151,9 +151,9 @@ if($merge_con_path eq 'F'){
 }
 
 
-open SH, "> $dir/sh/scds.sh" or die $!;
+open SH, "> $dir/sh/run_scdt.sh" or die $!;
 print SH "#!/bin/bash\n\n";
-print SH "log=$dir/scds.log\ndate '+%y-%m-%d %H:%M:%S\tanalysis begin' > \$log\n\n";
+print SH "log=$dir/scdt.log\ndate '+%y-%m-%d %H:%M:%S\tanalysis begin' > \$log\n\n";
 print SH "###########################################################\n";
 print SH "##########  1.get_sample_info_rgc_cnr_stac  ###############\n";
 print SH "###########################################################\n";
@@ -173,13 +173,7 @@ while(my $bamfile=<IN>){
 
 #### bwa mem and get info ####
 	my ($sam,$sortbam);
-	if($file=~/fq.gz/){
-		die "ref .fa file need set for bwa $0" if (!-s $ref);
-		print OUT $config{"bwa"}," mem -t 10 $ref $file >$datadir/$outname.sam\n";
-		$sam="$datadir/$outname.sam";
-	}else{
-		$sam=$file;
-	}
+	$sam=$file;
 
 	if($off_target eq "T"){ 
 		if(!$sam=~m/.*bam/){
@@ -195,9 +189,7 @@ while(my $bamfile=<IN>){
 
 	print OUT "sort -n -k 1.4 -k 2 $datadir/$outname.*info >$datadir/$outname.sort.info\n";
 
-	if($file=~/fg.gz/){
-		print OUT "rm -rf $datadir/$outname.sam\n";
-	}
+
 	if($off_target eq "T"){
 		print OUT "rm -rf $datadir/$outname.no_bed.info\n";
 	}else{
@@ -246,13 +238,8 @@ if ($confilelist ne "F"){
 
 	#### bwa mem and get info ####
 		my ($sam,$sortbam);
-		if($file=~/fq.gz/){
-			die "ref .fa file need set for bwa $0" if (!-s $ref);
-			print OUT $config{"bwa"}," mem -t 10 $ref $file >$condir/$outname.sam\n";
-			$sam="$condir/$outname.sam";
-		}else{
-			$sam=$file;
-		}
+		$sam=$file;
+
 
 		if($off_target eq "T"){ 
 			if(!$sam=~m/.*bam/){

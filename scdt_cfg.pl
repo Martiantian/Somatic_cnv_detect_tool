@@ -1,8 +1,5 @@
 %config = (
 	perl          => " perl ",
-	Rscript       => "Rscript",
-	bwa           => " bwa ",
+	Rscript       => "Rscript ",
 	samtools      => " samtools ",
-	ref         => "",## dir for ref.fa 
-
 );

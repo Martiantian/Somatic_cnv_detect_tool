@@ -1,3 +1,9 @@
+#Author: wangsxiaofeng
+#Email:wangxiaofeng@genomics.cn
+#File Name:
+#Description:
+#Edit History:
+#2016-01-30 17:00:03  File created.
 args=commandArgs(TRUE);
 alpha=as.numeric(args[4])
 threshold=as.numeric(args[2])
@@ -103,7 +109,7 @@ if(dim(w)[1]!=0){
 	nname=rep(args[1],dim(w)[1])
 	w=cbind(nname,w)
 }
-w.names=c("Sample","Chr","Start","End","Length","Estimate_copy_ratio","P_vlaue","CNV","Start_bin","End_bin","True_bin_number")
+w.names=c("Sample","Chr","Start","End","Length","Estimate_copy_ratio","P_value","CNV","Start_bin","End_bin","True_bin_number")
 if(args[10]==1){
 	w=rbind(w.names,w)
 }

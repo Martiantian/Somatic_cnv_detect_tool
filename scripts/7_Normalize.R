@@ -1,3 +1,10 @@
+#Author: wangsxiaofeng
+#Email:wangxiaofeng@genomics.cn
+#File Name:
+#Description:
+# 
+#Edit History:
+#2016-01-30 17:00:03  File created.
 args=commandArgs(TRUE);
 	alpha=as.numeric(args[2])
 	name=paste(args[4],"cv0.normal.txt",sep=".")

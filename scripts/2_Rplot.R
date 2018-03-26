@@ -1,5 +1,5 @@
-#Author: ***
-#Email:***@genomics.org.cn
+#Author: wangsxiaofeng
+#Email:wangxiaofeng@genomics.cn
 #File Name:
 #Description:
 # this program after extractInfo.pl chrno start length
